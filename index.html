@@ -30,6 +30,16 @@
     </div>
     <div class="cursor-dot"></div>
 
+    <!-- Scroll Reminder -->
+    <div class="scroll-reminder" id="scroll-reminder">
+        <div class="scroll-reminder-track">
+            <div class="scroll-reminder-line"></div>
+            <div class="scroll-reminder-dot"></div>
+        </div>
+        <span class="scroll-reminder-text">Scroll</span>
+        <i data-lucide="chevrons-down" class="scroll-reminder-icon"></i>
+    </div>
+
     <!-- Command Palette -->
     <div class="command-palette">
         <div class="command-palette-modal">
@@ -147,7 +157,7 @@
                         <div class="card-content space-y-3">
                             <div class="space-y-1">
                                 <h3 class="text-2xl font-bold text-zinc-100 transition-colors tracking-tight">Carbolt</h3>
-                                <span class="text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">Founder</span>
+                                <span class="text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">Developer & Product Designer</span>
                             </div>
                             <p class="text-zinc-400 leading-relaxed">Carbon tracker that measures digital and device-based emissions. Targeting a <span class="metric">15% reduction</span> in personal digital carbon footprint through real-time tracking and actionable insights.</p>
                             <a href="https://github.com/pratham-jain33" target="_blank" class="build-log-link">
@@ -163,7 +173,7 @@
                         <div class="card-content space-y-3">
                             <div class="space-y-1">
                                 <h3 class="text-2xl font-bold text-zinc-100 transition-colors tracking-tight">BlazeX</h3>
-                                <span class="text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">Co-Founder</span>
+                                <span class="text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">Volunteer</span>
                             </div>
                             <p class="text-zinc-400 leading-relaxed">Tech-driven water conservation targeting <span class="metric">20% reduction</span> in household waste. Partnered with Parikrama & ILoveToCare.</p>
                             <a href="https://github.com/pratham-jain33" target="_blank" class="build-log-link">
@@ -179,7 +189,7 @@
                         <div class="card-content space-y-3">
                             <div class="space-y-1">
                                 <h3 class="text-xl font-bold text-zinc-100 transition-colors tracking-tight">Prythm</h3>
-                                <span class="text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">Founder & CEO</span>
+                                <span class="text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">Music Producer</span>
                             </div>
                             <p class="text-zinc-500 leading-relaxed">Independent music project creating atmospheric, mood-driven instrumental tracks with ambient and R&B elements.</p>
                             <a href="#" class="build-log-link">
@@ -467,29 +477,56 @@
                 <span class="section-label">Lessons Learned</span>
                 <div class="anti-portfolio">
                     <p class="anti-portfolio-intro">Projects that didn't make it — and what they taught me.</p>
-                    <div class="anti-portfolio-grid">
-                        <div class="anti-portfolio-item">
-                            <div class="anti-portfolio-icon">✕</div>
-                            <div class="anti-portfolio-content">
-                                <h4>VoiceMail</h4>
-                                <p class="anti-portfolio-desc">High-speed, AI-powered voice dictation and transcription app, enabling users to dictate text 3x faster than typing</p>
-                                <span class="anti-portfolio-lesson">Bad go-to-market strategy.</span>
+                    <div class="anti-portfolio-grid">                        
+                        <div class="anti-portfolio-item anti-portfolio-wide tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
+                            <div class="anti-portfolio-icon-wrapper">
+                                <i data-lucide="music-2" class="anti-portfolio-icon"></i>
                             </div>
-                        </div>
-                        <div class="anti-portfolio-item">
-                            <div class="anti-portfolio-icon">✕</div>
                             <div class="anti-portfolio-content">
-                                <h4>SignalOff</h4>
-                                <p class="anti-portfolio-desc">Extension that limits social media usage by hiding feeds, reducing noise and boosting productivity.</p>
-                                <span class="anti-portfolio-lesson">Research competition before building.</span>
-                            </div>
-                        </div>
-                        <div class="anti-portfolio-item">
-                            <div class="anti-portfolio-icon">✕</div>
-                            <div class="anti-portfolio-content">
-                                <h4>RhythmX</h4>
+                                <div class="anti-header">
+                                    <h4>RhythmX</h4>
+                                    <span class="failure-tag">Failed</span>
+                                </div>
                                 <p class="anti-portfolio-desc">App that converts music into MIDI files and teaches you to play the piano</p>
-                                <span class="anti-portfolio-lesson">Failure to adapt.</span>
+                                <div class="lesson-container">
+                                    <i data-lucide="alert-circle" class="lesson-icon"></i>
+                                    <span class="anti-portfolio-lesson">Failure to adapt.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="anti-portfolio-item tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
+                            <div class="anti-portfolio-icon-wrapper">
+                                <i data-lucide="mic-off" class="anti-portfolio-icon"></i>
+                            </div>
+                            <div class="anti-portfolio-content">
+                                <div class="anti-header">
+                                    <h4>VoiceMail</h4>
+                                    <span class="failure-tag">Failed</span>
+                                </div>
+                                <p class="anti-portfolio-desc">High-speed, AI-powered voice dictation and transcription app, enabling users to dictate text 3x faster than typing</p>
+                                <div class="lesson-container">
+                                    <i data-lucide="alert-circle" class="lesson-icon"></i>
+                                    <span class="anti-portfolio-lesson">Bad go-to-market strategy.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="anti-portfolio-item tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
+                            <div class="anti-portfolio-icon-wrapper">
+                                <i data-lucide="wifi-off" class="anti-portfolio-icon"></i>
+                            </div>
+                            <div class="anti-portfolio-content">
+                                <div class="anti-header">
+                                    <h4>SignalOff</h4>
+                                    <span class="failure-tag">Failed</span>
+                                </div>
+                                <p class="anti-portfolio-desc">Extension that limits social media usage by hiding feeds, reducing noise and boosting productivity.</p>
+                                <div class="lesson-container">
+                                    <i data-lucide="alert-circle" class="lesson-icon"></i>
+                                    <span class="anti-portfolio-lesson">Research competition before building.</span>
+                                </div>
+                            </div>
+                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>

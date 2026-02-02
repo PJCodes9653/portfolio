@@ -813,15 +813,23 @@ class PrythmPlayer {
                     document.removeEventListener('click', playOnInteraction);
                     document.removeEventListener('keydown', playOnInteraction);
                     document.removeEventListener('touchstart', playOnInteraction);
+                    document.removeEventListener('scroll', playOnInteraction);
+                    document.removeEventListener('mousemove', playOnInteraction);
                 };
                 document.addEventListener('click', playOnInteraction, { once: true });
                 document.addEventListener('keydown', playOnInteraction, { once: true });
                 document.addEventListener('touchstart', playOnInteraction, { once: true });
+                document.addEventListener('scroll', playOnInteraction, { once: true });
+                document.addEventListener('mousemove', playOnInteraction, { once: true });
             });
         };
         
-        // Small delay to ensure everything is loaded
-        setTimeout(attemptAutoplay, 500);
+        // Try immediately when DOM is ready
+        if (document.readyState === 'complete') {
+            attemptAutoplay();
+        } else {
+            window.addEventListener('load', attemptAutoplay);
+        }
     }
 
     setupMediaSession() {
@@ -1145,6 +1153,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize email copy
     initEmailCopy();
 
+    // Initialize scroll reminder
+    initScrollReminder();
+
     // Add click sounds to interactive elements
     document.querySelectorAll('a, button, .project-card').forEach(el => {
         el.addEventListener('click', () => sounds.playClick());
@@ -1165,4 +1176,83 @@ if ('ontouchstart' in window) {
     document.querySelectorAll('a, button').forEach(el => {
         el.addEventListener('touchstart', hapticFeedback);
     });
+}
+
+// ============================================
+// SCROLL REMINDER
+// ============================================
+function initScrollReminder() {
+    const scrollReminder = document.getElementById('scroll-reminder');
+    if (!scrollReminder) return;
+
+    let scrollTimeout;
+    let isVisible = false;
+    const IDLE_TIME = 3000; // 3 seconds of no scrolling
+
+    function getScrollPercent() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        return (scrollTop / scrollHeight) * 100;
+    }
+
+    function showReminder() {
+        // Don't show if user is in the last 10% of the page
+        if (getScrollPercent() >= 90) {
+            hideReminder();
+            return;
+        }
+        
+        if (!isVisible) {
+            isVisible = true;
+            scrollReminder.classList.add('visible');
+        }
+    }
+
+    function hideReminder() {
+        if (isVisible) {
+            isVisible = false;
+            scrollReminder.classList.remove('visible');
+        }
+    }
+
+    function resetTimer() {
+        // Hide reminder when user scrolls
+        hideReminder();
+        
+        // Clear existing timeout
+        clearTimeout(scrollTimeout);
+        
+        // Don't set new timeout if in last 10%
+        if (getScrollPercent() >= 90) return;
+        
+        // Set new timeout to show reminder after idle time
+        scrollTimeout = setTimeout(showReminder, IDLE_TIME);
+    }
+
+    // Listen for scroll events
+    window.addEventListener('scroll', resetTimer, { passive: true });
+    
+    // Also listen for mouse movement and touch (user is active but not scrolling)
+    window.addEventListener('mousemove', () => {
+        if (isVisible) return; // Don't reset if already visible
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(showReminder, IDLE_TIME);
+    }, { passive: true });
+
+    // Click on reminder to scroll down
+    scrollReminder.addEventListener('click', () => {
+        window.scrollBy({
+            top: window.innerHeight * 0.8,
+            behavior: 'smooth'
+        });
+    });
+    scrollReminder.style.cursor = 'pointer';
+    scrollReminder.style.pointerEvents = 'auto';
+
+    // Initial check after page load
+    setTimeout(() => {
+        if (getScrollPercent() < 90) {
+            scrollTimeout = setTimeout(showReminder, IDLE_TIME);
+        }
+    }, 1000);
 }
