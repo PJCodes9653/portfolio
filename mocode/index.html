@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoCode - Morse Code Translator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="loader">
+        <h1 class="fade-in">MoCode</h1>
+    </div>
+    
+    <div class="container">
+        <h1>MoCode</h1>
+        
+        <div class="input-area">
+            <textarea id="input" rows="3" placeholder="Type here..."></textarea>
+            <div class="input-meta">
+                <div id="validation-message"></div>
+                <div id="char-count">0 chars</div>
+            </div>
+        </div>
+        
+        <!-- Signal Flasher Light Indicator -->
+        <div id="flasher" class="flasher-beacon" title="Morse Visual Signal"></div>
+        
+        <textarea id="output" rows="4" readonly placeholder="Result"></textarea>
+        
+        <div class="button-group">
+            <button id="copy" class="circle-btn" title="Copy">
+                <i class="far fa-copy"></i>
+            </button>
+            <button id="test" class="circle-btn" title="Play / Stop Audio">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <button id="reverse" class="circle-btn" title="Reverse">
+                <i class="fas fa-exchange-alt"></i>
+            </button>
+            <button id="cheat-sheet-btn" class="circle-btn" title="Morse Reference Guide">
+                <i class="fas fa-book-open"></i>
+            </button>
+            <button id="show-history" class="circle-btn" title="History">
+                <i class="fas fa-history"></i>
+            </button>
+        </div>
+        
+        <div id="history-panel" class="hidden">
+            <h3>Translation History</h3>
+            <div id="history-list"></div>
+            <button id="clear-history">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+        
+        <h5>- Pratham J</h5>
+    </div>
+
+    <!-- Morse Cheat Sheet Modal (Outside Container for full screen backdrop) -->
+    <div id="cheat-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-book-open"></i> Morse Code Guide</h3>
+                <button id="close-cheat-modal" class="close-btn">&times;</button>
+            </div>
+            <div id="cheat-sheet-grid" class="cheat-grid"></div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
